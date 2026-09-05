@@ -1,5 +1,6 @@
 # Controller Monitor
-This application is a simple transparent box for displaying common **controller** analog inputs.
+This application is a simple transparent box for displaying common **controller** analog inputs. <br>
+![Releases](https://github.com/aidenh1613-commits/ControllerMonitor/releases)
 
 ## What it shows
 - Throttle
