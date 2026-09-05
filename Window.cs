@@ -15,7 +15,7 @@ public partial class Window : Form
 
     private readonly ColoredProgressBar brakeBar = new() { Dock = DockStyle.Fill, Margin = new(0, 0, 0, 5), BarColor = Color.Red, BarBackgroundColor = Color.FromArgb(50, 50, 50) };
     private readonly ColoredProgressBar throttleBar = new() { Dock = DockStyle.Fill, Margin = new(0, 0, 0, 5), BarColor = Color.LimeGreen, BarBackgroundColor = Color.FromArgb(50, 50, 50) };
-    private readonly ColoredProgressBar steeringBar = new() { Dock = DockStyle.Fill, Margin = new(0, 0, 0, 5), BarColor = Color.DodgerBlue, BarBackgroundColor = Color.FromArgb(50, 50, 50) };
+    private readonly SteeringBar steeringBar = new() { Dock = DockStyle.Fill, Margin = new(0, 0, 0, 5), BarColor = Color.DodgerBlue, BarBackgroundColor = Color.FromArgb(50, 50, 50) };
 
     private readonly nint controller;
     private readonly System.Windows.Forms.Timer timer = new() { Interval = 10 };

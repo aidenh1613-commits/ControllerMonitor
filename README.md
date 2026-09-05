@@ -21,6 +21,7 @@ Controller is needed.
 - I'll try to listen to good requests.
 - It only works on windows because I'm using winforms... sorry linux users!
 - Controller must be SDL2‑compatible!
+- If anti-virus scans it then you may need to close it and reopen it for the layering to work correctly.
 
 ## Images
 <p align="left">
