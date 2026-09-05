@@ -72,6 +72,7 @@ public partial class Window : Form
         if (this.controller == 0)
         {
             MessageBox.Show("No compatible controller found.");
+            Environment.Exit(0);
             return;
         }
 
