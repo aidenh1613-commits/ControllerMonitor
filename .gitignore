@@ -1,0 +1,24 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# NuGet packages (if using a local packages folder)
+packages/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
