@@ -27,7 +27,7 @@ Controller is needed.
 <p align="left">
   <img src="imagesForReadMe/v1.0.0/inGameExample.png" width="350" title="In Game Example">
 </p>
-Note that this is the default size, but it can be smaller.
+Note that this is the smallest size at the moment.
 
 <br>
 <EOF>
