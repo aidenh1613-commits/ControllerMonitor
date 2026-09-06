@@ -70,6 +70,7 @@ public partial class Window : Form
                 break;
             }
 
+
         this.timer.Tick += ReadController;
         this.timer.Start();
     }
@@ -77,12 +78,16 @@ public partial class Window : Form
     private void ReadController(object? sender, EventArgs e)
     {
         SDL.SDL_GameControllerUpdate();
-        if (this.controller == 0 && !this.noCompatibleControllerMessageBeingShown)
+        if (this.controller == 0 || SDL.SDL_GameControllerGetAttached(this.controller) == SDL.SDL_bool.SDL_FALSE)
         {
-            this.noCompatibleControllerMessageBeingShown = true;
-            MessageBox.Show("No compatible controller found.");
-            this.noCompatibleControllerMessageBeingShown = false;
-            Environment.Exit(0);
+            if (!this.noCompatibleControllerMessageBeingShown)
+            {
+                this.noCompatibleControllerMessageBeingShown = true;
+                MessageBox.Show("No compatible controller found.");
+                this.noCompatibleControllerMessageBeingShown = false;
+                Environment.Exit(0);
+            }
+
             return;
         }
 
