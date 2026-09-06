@@ -18,6 +18,7 @@ public partial class Window : Form
     private readonly SteeringBar steeringBar = new() { Dock = DockStyle.Fill, Margin = new(0, 0, 0, 5), BarColor = Color.DodgerBlue, BarBackgroundColor = Color.FromArgb(50, 50, 50) };
 
     private readonly nint controller;
+    private bool noCompatibleControllerMessageBeingShown = false;
     private readonly System.Windows.Forms.Timer timer = new() { Interval = 10 };
 
     public Window()
@@ -69,13 +70,6 @@ public partial class Window : Form
                 break;
             }
 
-        if (this.controller == 0)
-        {
-            MessageBox.Show("No compatible controller found.");
-            Environment.Exit(0);
-            return;
-        }
-
         this.timer.Tick += ReadController;
         this.timer.Start();
     }
@@ -83,6 +77,14 @@ public partial class Window : Form
     private void ReadController(object? sender, EventArgs e)
     {
         SDL.SDL_GameControllerUpdate();
+        if (this.controller == 0 && !this.noCompatibleControllerMessageBeingShown)
+        {
+            this.noCompatibleControllerMessageBeingShown = true;
+            MessageBox.Show("No compatible controller found.");
+            this.noCompatibleControllerMessageBeingShown = false;
+            Environment.Exit(0);
+            return;
+        }
 
         double brake = SDL.SDL_GameControllerGetAxis(this.controller, SDL.SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_TRIGGERLEFT) / 32767.0 * 100;
         double throttle = SDL.SDL_GameControllerGetAxis(this.controller, SDL.SDL_GameControllerAxis.SDL_CONTROLLER_AXIS_TRIGGERRIGHT) / 32767.0 * 100;
