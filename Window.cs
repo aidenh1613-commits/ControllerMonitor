@@ -83,7 +83,7 @@ public partial class Window : Form
             if (!this.noCompatibleControllerMessageBeingShown)
             {
                 this.noCompatibleControllerMessageBeingShown = true;
-                MessageBox.Show("No compatible controller found.");
+                MessageBox.Show("No compatible controller found.", "Controller Monitor");
                 this.noCompatibleControllerMessageBeingShown = false;
                 Environment.Exit(0);
             }
