@@ -2,5 +2,8 @@
     "app.label.inputs.l2": "Brake",
     "app.label.inputs.r2": "Throttle",
     "app.label.inputs.l": "Steering",
-    "app.messagebox.no_compatible_controller": "No compatible controller found. Please connect a controller and restart the application."
+    "app.messagebox.no_compatible_controller": "No compatible controller found. Please connect a controller and restart the application.",
+    "app.label.options.close_program_on_controller_disconnect": "Close program on controller disconnect",
+    "app.label.options.include_keybored_inputs": "Include keyboard inputs",
+    "app.label.options.language_file": "Change language"
 }

@@ -22,6 +22,8 @@ Controller is needed.
 - May work on linux now! I don't have linux so its hard to test lol
 - Controller must be SDL2‑compatible!
 - If anti-virus scans it then you may need to close it and reopen it for the layering to work correctly.
+- If no controller is pluged in then it will instantly close.
+- I plan on adding settings later. (lang file already has the names)
 
 ## Images
 <p align="left">
