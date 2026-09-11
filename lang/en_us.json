@@ -1,0 +1,6 @@
+{
+    "app.label.inputs.l2": "Brake",
+    "app.label.inputs.r2": "Throttle",
+    "app.label.inputs.l": "Steering",
+    "app.messagebox.no_compatible_controller": "No compatible controller found. Please connect a controller and restart the application."
+}

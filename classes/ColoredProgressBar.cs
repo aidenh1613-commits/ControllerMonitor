@@ -1,45 +1,66 @@
-using System.ComponentModel;
-using System.Drawing.Drawing2D;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Media;
 
 namespace ControllerMonitor;
 
 public class ColoredProgressBar : Control
 {
-    private int value;
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public static readonly StyledProperty<int> ValueProperty =
+        AvaloniaProperty.Register<ColoredProgressBar, int>(
+            nameof(Value),
+            defaultValue: 0);
+
+    public static readonly StyledProperty<Color> BarColorProperty =
+        AvaloniaProperty.Register<ColoredProgressBar, Color>(
+            nameof(BarColor),
+            defaultValue: Colors.LimeGreen);
+
+    public static readonly StyledProperty<Color> BarBackgroundColorProperty =
+        AvaloniaProperty.Register<ColoredProgressBar, Color>(
+            nameof(BarBackgroundColor),
+            defaultValue: Color.FromRgb(50, 50, 50));
+
     public int Value
     {
-        get => value;
-        set { this.value = Math.Clamp(value, 0, 100); Invalidate(); }
+        get => GetValue(ValueProperty);
+        set => SetValue(ValueProperty, Math.Clamp(value, 0, 100));
     }
 
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public Color BarColor { get; set; } = Color.LimeGreen;
+    public Color BarColor
+    {
+        get => GetValue(BarColorProperty);
+        set => SetValue(BarColorProperty, value);
+    }
 
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public Color BarBackgroundColor { get; set; } = Color.LightGray;
+    public Color BarBackgroundColor
+    {
+        get => GetValue(BarBackgroundColorProperty);
+        set => SetValue(BarBackgroundColorProperty, value);
+    }
 
     public ColoredProgressBar()
     {
-        DoubleBuffered = true;
         Height = 25;
+        
+        AffectsRender<ColoredProgressBar>(ValueProperty, BarColorProperty, BarBackgroundColorProperty);
     }
 
-    protected override void OnPaint(PaintEventArgs e)
+    public override void Render(DrawingContext context)
     {
-        base.OnPaint(e);
-        var g = e.Graphics;
-        g.SmoothingMode = SmoothingMode.AntiAlias;
+        base.Render(context);
 
-        int w = Width;
-        int h = Height;
+        double width = Bounds.Width;
+        double height = Bounds.Height;
 
-        using var bg = new SolidBrush(this.BarBackgroundColor);
-        g.FillRectangle(bg, 0, 0, w, h);
+        context.FillRectangle(
+            new SolidColorBrush(BarBackgroundColor),
+            new Rect(0, 0, width, height));
 
-        int fill = (int)(w * (Value / 100f));
+        double fill = width * (Value / 100.0);
 
-        using var bar = new SolidBrush(this.BarColor);
-        g.FillRectangle(bar, 0, 0, fill, h);
+        context.FillRectangle(
+            new SolidColorBrush(BarColor),
+            new Rect(0, 0, fill, height));
     }
 }

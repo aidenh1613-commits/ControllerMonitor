@@ -1,0 +1,75 @@
+<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ControllerMonitor"
+    x:Class="ControllerMonitor.Window"
+    Title="Controller Monitor"
+    Width="400"
+    Height="320"
+    MinWidth="200"
+    MinHeight="200"
+    Background="Transparent"
+    TransparencyLevelHint="Transparent"
+    WindowDecorations="Full"
+    Topmost="True">
+
+    <Grid>
+
+        <!-- main UI -->
+        <Grid Margin="30,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                x:Name="BrakeLabel"
+                Grid.Row="0"
+                Text="Brake: 0%"
+                FontSize="18"
+                Foreground="LightGray"
+                VerticalAlignment="Center" />
+
+            <local:ColoredProgressBar
+                x:Name="BrakeBar"
+                BarColor="Red"
+                Grid.Row="1"
+                Margin="0,0,0,5" />
+
+            <TextBlock
+                x:Name="ThrottleLabel"
+                Grid.Row="2"
+                Text="Throttle: 0%"
+                FontSize="18"
+                Foreground="LightGray"
+                VerticalAlignment="Center" />
+
+            <local:ColoredProgressBar
+                x:Name="ThrottleBar"
+                Value="0"
+                Grid.Row="3"
+                Margin="0,0,0,5" />
+
+            <TextBlock
+                x:Name="SteeringLabel"
+                Grid.Row="4"
+                Text="Steering: 0%"
+                FontSize="18"
+                Foreground="LightGray"
+                VerticalAlignment="Center" />
+
+            <local:SteeringBar
+                x:Name="SteeringBar"
+                Value="0"
+                Grid.Row="5"
+                Margin="0,0,0,5" />
+
+        </Grid>
+
+    </Grid>
+
+</Window>

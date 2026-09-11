@@ -1,11 +1,18 @@
+using Avalonia;
+
 namespace ControllerMonitor;
 
-static class Program
+internal class Program
 {
     [STAThread]
-    static void Main()
+    public static void Main(string[] args)
     {
-        ApplicationConfiguration.Initialize();
-        Application.Run(new Window());
+        BuildAvaloniaApp()
+            .StartWithClassicDesktopLifetime(args);
     }
+
+    public static AppBuilder BuildAvaloniaApp()
+        => AppBuilder.Configure<App>()
+            .UsePlatformDetect()
+            .LogToTrace();
 }

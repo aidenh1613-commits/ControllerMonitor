@@ -1,54 +1,75 @@
-using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Media;
 
 namespace ControllerMonitor;
 
 public class SteeringBar : Control
 {
-    private int value;
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public static readonly StyledProperty<int> ValueProperty =
+        AvaloniaProperty.Register<SteeringBar, int>(
+            nameof(Value),
+            defaultValue: 0);
+
+    public static readonly StyledProperty<Color> BarColorProperty =
+        AvaloniaProperty.Register<SteeringBar, Color>(
+            nameof(BarColor),
+            defaultValue: Colors.DodgerBlue);
+
+    public static readonly StyledProperty<Color> BarBackgroundColorProperty =
+        AvaloniaProperty.Register<SteeringBar, Color>(
+            nameof(BarBackgroundColor),
+            defaultValue: Color.FromRgb(50, 50, 50));
+
     public int Value
     {
-        get => value;
-        set { this.value = Math.Clamp(value, -100, 100); Invalidate(); }
+        get => GetValue(ValueProperty);
+        set => SetValue(ValueProperty, Math.Clamp(value, -100, 100));
     }
 
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public Color BarColor { get; set; } = Color.DodgerBlue;
+    public Color BarColor
+    {
+        get => GetValue(BarColorProperty);
+        set => SetValue(BarColorProperty, value);
+    }
 
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public Color BarBackgroundColor { get; set; } = Color.FromArgb(50, 50, 50);
+    public Color BarBackgroundColor
+    {
+        get => GetValue(BarBackgroundColorProperty);
+        set => SetValue(BarBackgroundColorProperty, value);
+    }
 
     public SteeringBar()
     {
-        DoubleBuffered = true;
-        ResizeRedraw = true;
         Height = 30;
+
+        AffectsRender<SteeringBar>(ValueProperty, BarColorProperty, BarBackgroundColorProperty);
     }
 
-    protected override void OnPaint(PaintEventArgs e)
+    public override void Render(DrawingContext context)
     {
-        base.OnPaint(e);
-        var g = e.Graphics;
-        g.SmoothingMode = SmoothingMode.AntiAlias;
+        base.Render(context);
 
-        int w = ClientSize.Width;
-        int h = ClientSize.Height;
-        int center = w / 2;
+        double width = Bounds.Width;
+        double height = Bounds.Height;
+        double center = width / 2;
 
         // Background
-        using var bg = new SolidBrush(this.BarBackgroundColor);
-        g.FillRectangle(bg, 0, 0, w, h);
+        context.FillRectangle(
+            new SolidColorBrush(BarBackgroundColor),
+            new Rect(0, 0, width, height));
 
         // Filled section
-        int fill = (int)(Math.Abs(Value) / 100f * center);
-        int x = Value < 0 ? center - fill : center;
+        double fill = Math.Abs(Value) / 100.0 * center;
+        double x = Value < 0 ? center - fill : center;
 
-        using var bar = new SolidBrush(this.BarColor);
-        g.FillRectangle(bar, x, 0, fill, h);
+        context.FillRectangle(
+            new SolidColorBrush(BarColor),
+            new Rect(x, 0, fill, height));
 
         // Center line
-        using var line = new SolidBrush(Color.White);
-        g.FillRectangle(line, center - 1, 0, 2, h);
+        context.FillRectangle(
+            Brushes.White,
+            new Rect(center - 1, 0, 2, height));
     }
 }
