@@ -1,4 +1,5 @@
 {
+    "this.title": "English",
     "app.label.inputs.l2": "Brake: $%s%",
     "app.label.inputs.r2": "Throttle: $%s%",
     "app.label.inputs.l": "Steering: $%s%",
