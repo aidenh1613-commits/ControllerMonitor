@@ -15,15 +15,15 @@ Controller is needed.
 - You can resize it like any other program.
 
 ### Moving
-- You can move it like any other program
+- You can move it like any other program.
 
 ## Notes
-- I'll try to listen to good requests.
+- I'll try to listen to good requests. (Discord contact (exactly): aidenh16133)
 - May work on linux now! I don't have linux so I can't test
 - Controller must be SDL2‑compatible!
 - If anti-virus scans it then you may need to close it and reopen it for the layering to work correctly.
-- I plan on adding more settings later. (lang file already has the names)
-- You can change the language now, though there is only english and a test language...
+- I plan on adding more settings later.
+- You can change the language now, you can even add your own custom preset if you wanna.
 
 ## Images
 <p align="left">
