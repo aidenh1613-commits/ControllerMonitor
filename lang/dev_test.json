@@ -1,4 +1,5 @@
 {
+    "this.title": "Development Testing",
     "app.label.inputs.l2": "what-stop-sign: $%s%",
     "app.label.inputs.r2": "zoom!: $%s%",
     "app.label.inputs.l": "wheels: $%s%",
